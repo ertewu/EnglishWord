@@ -9,7 +9,7 @@ bin/
 gen/
 
 # Gradle files
-.gradle/
+#.gradle/
 .idea
 build/
 gradle/wrapper/
