@@ -1,0 +1,9 @@
+#new_word_area {
+    float: left;
+    width: 35%;
+}
+
+#word_list_area {
+    float: left;
+    width: 65%;
+}

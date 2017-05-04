@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.thymeleaf.org"
+        >
+
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>单词Record系统</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}"></link>
 </head>
+
 <body>
 
 <div id="new_word_area">
     <h1>请在这里添加新的单词</h1>
 
     <form>
-        单词: <input type=text" id="word"/>
-        录入标签:<input type=text" id="word_tag"/>
-        单词解释:<input type="text" id="detail_mean"/>
-        来源网址输入:<input type="text" id="srcUrl"/>
-        例句输入: <textarea id="sentense" name="sentense" cols="60" rows="10">在此输入例句</textarea>
-        备注: <textarea id="tip_content" name="tip_content" cols="60" rows="10">在此输入备注</textarea>
+        <p>单词: <input type=text" id="word"/></p>
+
+        <p>录入标签:<input type=text" id="word_tag"/></p>
+
+        <p>单词解释:<input type="text" id="detail_mean"/></p>
+
+        <p>来源网址输入:<input type="text" id="srcUrl"/></p>
+
+        <p>例句输入:<br/> <textarea id="sentense" name="sentense" cols="60" rows="10">在此输入例句</textarea></p>
+
+        <p>备注:<br/> <textarea id="tip_content" name="tip_content" cols="60" rows="10">在此输入备注</textarea></p>
+
+        <input type="submit" value="Submit">
     </form>
 </div>
 
