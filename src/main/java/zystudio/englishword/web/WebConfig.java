@@ -3,7 +3,9 @@ package zystudio.englishword.web;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -16,7 +18,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 @EnableWebMvc
-public class WebConfig {
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
@@ -41,4 +43,10 @@ public class WebConfig {
         return templateResolver;
     }
 
+    //静态资源处理，当DispatcherServlet接收到了他匹配的请求，但是找不到相应的Controller,就会把这个请求返回给默认处理
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        super.configureDefaultServletHandling(configurer);
+        configurer.enable();
+    }
 }
