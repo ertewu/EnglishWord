@@ -25,6 +25,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setCharacterEncoding("utf-8");
         viewResolver.setTemplateEngine(templateEngine);
         return viewResolver;
     }
@@ -41,6 +42,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         TemplateResolver templateResolver = new ServletContextTemplateResolver();
         templateResolver.setPrefix("/views/");
         templateResolver.setSuffix(".html");
+//        templateResolver.setCharacterEncoding("utf-8");
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
     }
