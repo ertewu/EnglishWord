@@ -1,6 +1,7 @@
 package zystudio.englishword.web;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -18,6 +19,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan("zystudio.englishword.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -28,7 +30,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public TemplateEngine templateEngine(TemplateResolver templateResolver) {
+    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
         return templateEngine;
@@ -37,7 +39,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public TemplateResolver templateResolver() {
         TemplateResolver templateResolver = new ServletContextTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/templates");
+        templateResolver.setPrefix("/views/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
