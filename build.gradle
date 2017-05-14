@@ -19,6 +19,7 @@ dependencies {
     compile "org.springframework:spring-webmvc:$springVersion"
     compile "org.springframework:spring-jdbc:$springVersion"
     compile "org.thymeleaf:thymeleaf-spring4:$thymeleafVersion"
+    compile "javax.validation:validation-api:1.1.0.Final"
     providedCompile "javax.servlet:javax.servlet-api:$servletApiVersion"
 
     testCompile "junit:junit:4.11"

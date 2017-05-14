@@ -5,7 +5,7 @@
     <meta http-equiv="CONTENT-TYPE" content="text/html;charset=utf-8"/>
     <!--汉语标题，还不能显示出来，有空再弄-->
     <title>英语单词记录系统</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}" ></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}"></link>
     <!--<link rel="stylesheet" type="text/css" href="../resources/homePage.css"></link>-->
 </head>
 
@@ -15,16 +15,17 @@
 <div id="new_word_area">
     <h1>请在这里添加新的单词</h1>
 
-    <form>
-        <p><label for="word">单词:</label> <input type="text" id="word"/></p>
+    <form method="POST" action="/uploadword" th:object="${wordEntry}">
+        <p><label for="word">单词:</label> <input type="text" id="word" th:field="*{word}"/></p>
 
-        <p><label for="word_tag">录入标签:</label><input type="text" id="word_tag"/></p>
+        <p><label for="word_tag">录入标签:</label><input type="text" id="word_tag" th:field="*{wordfromTag}"/></p>
 
-        <p><label for="detail_mean">单词解释:</label><input type="text" id="detail_mean"/></p>
+        <p><label for="detail_mean">单词解释:</label><input type="text" id="detail_mean" th:field="*{detailMean}"/></p>
 
-        <p><label for="srcUrl">来源网址输入:</label><input type="text" id="srcUrl"/></p>
+        <p><label for="srcUrl">来源网址输入:</label><input type="text" id="srcUrl" th:field="*{tipUrl}"/></p>
 
-        <p><label for="sentense">例句输入:</label><br/> <textarea id="sentense" name="sentense" cols="60" rows="10">在此输入例句</textarea></p>
+        <p><label for="sentense">例句输入:</label><br/> <textarea id="sentense" name="sentense" cols="60"
+                                                              rows="10">在此输入例句</textarea></p>
 
         <p>备注:<br/> <textarea id="tip_content" name="tip_content" cols="60" rows="10">在此输入备注</textarea></p>
 
