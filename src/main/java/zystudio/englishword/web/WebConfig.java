@@ -52,5 +52,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 //        super.configureDefaultServletHandling(configurer);
         configurer.enable();
+        System.out.println("configDefaultServletHanding occured?");
     }
 }

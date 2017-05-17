@@ -74,6 +74,10 @@ public class WordEntry {
         this.tipContent = tipContent;
     }
 
+    public WordEntry() {
+
+    }
+
     @Override
     public String toString() {
         return "WordEntry{" +

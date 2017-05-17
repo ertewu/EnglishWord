@@ -21,17 +21,29 @@ public class HomeController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String homePage(Model model) {
-        model.addAttribute("wordEntry",new WordEntry());
+        System.out.println("homePage occured:");
+        model.addAttribute("wordentry", new WordEntry());
         return "homePage";
     }
 
-    @RequestMapping(value = "/uploadword", method = RequestMethod.POST)
-    public String uploadWord(@Valid WordEntry entry, Errors errors) {
-        System.out.println("uploadword occured:" + entry);
+    @RequestMapping(value = "uploadword", method = RequestMethod.POST)
+    public String uploadword(@Valid WordEntry wordentry, Errors errors) {
+        System.out.println("uploadword occured:" + wordentry);
         if (errors.hasErrors()) {
             return "";
         }
         return "";
     }
 
+//    @RequestMapping(value = "uploadword", method = RequestMethod.POST)
+//    public String uploadword(WordEntry wordentry) {
+//        System.out.println("uploadword 2 occured:" + wordentry);
+//        return "";
+//    }
+//
+//    @RequestMapping(method = RequestMethod.POST)
+//    public String homePage(WordEntry wordentry) {
+//        System.out.println("uploadword 3occured:" + wordentry);
+//        return "";
+//    }
 }
