@@ -5,17 +5,45 @@
     <meta http-equiv="CONTENT-TYPE" content="text/html;charset=utf-8"/>
     <!--汉语标题，还不能显示出来，有空再弄-->
     <title>英语单词记录系统</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}"/>
     <!--<link rel="stylesheet" type="text/css" href="../resources/homePage.css"></link>-->
+    <!--这个jquery刚开始用的网上的url还不行,在调试时,先得弄到本地来"-->
+    <script src="../js/jquery-1.8.0.js">
+    </script>
+    <script>
+        //这个srcipt要在加载完静态内容后生效,所以得放在form的静态html后边,否则就放在 document.ready里边也可以
+        console.log("ZYStudio enter this script occured");
+        $(document).ready(function(){
+            var frm;
+            console.log("ZYStudio document ready occured");
+            frm = $("#uploadword_form");
+            frm.submit(function(ev){
+                console.log("ZYStudio frm sumbmit upload occured");
+                $.ajax({
+                    type:frm.attr('method'),
+                    url:frm.attr('action'),
+                    //这个serialize 是序列表格为字符串, 就像get请求的参数一样,跟thymeleaf的object构造并不一样.可能这还不是这么玩的,但先试试会是什么样的结果- 额竟然是行的
+                    data: frm.serialize(),
+                    success: function(data){
+                        alert('ok');
+                    },
+                    error:function(e) {
+                        alert("Err !");
+                    },
+                });
+                ev.preventDefault();
+            });
+        });
+    </script>
 </head>
-
 <body>
 
 <!--Hello World-->
 <div id="new_word_area">
     <h1>请在这里添加新的单词</h1>
+    <!--<form method="POST"  action="uploadword"   th:object="${wordentry}">-->
+    <form id="uploadword_form" method="POST"  action="uploadword"   th:object="${wordentry}">
 
-    <form method="POST"  action="uploadword"   th:object="${wordentry}">
         <p><label for="word">单词:</label> <input type="text" id="word" th:field="*{word}"/></p>
 
         <p><label for="word_tag">录入标签:</label><input type="text" id="word_tag" /></p>
@@ -24,8 +52,9 @@
 
         <p><label for="srcUrl">来源网址输入:</label><input type="text" id="srcUrl" /></p>
 
-        <p><label for="sentense">例句输入:</label><br/> <textarea id="sentense" name="sentense" cols="60"
-                                                              rows="10">在此输入例句</textarea></p>
+        <p><label for="sentense">例句输入:</label><br/>
+            <textarea id="sentense" name="sentense" cols="60" rows="10">在此输入例句</textarea>
+        </p>
 
         <p>备注:<br/> <textarea id="tip_content" name="tip_content" cols="60" rows="10">在此输入备注</textarea></p>
 
@@ -37,5 +66,26 @@
     <h1>已添加单词列表</h1>
 </div>
 
+<!--<script>-->
+    <!--//这个srcipt要在加载完静态内容后生效,所以得放在form的静态html后边,否则就放在 document.ready里边也可以,但是frs变量,就也一定要在ready中再初始化-->
+    <!--var frm=$("#uploadword_form");-->
+    <!--console.log("ZYStudio enter this script occured");-->
+    <!--frm.submit(function(ev){-->
+        <!--console.log("ZYStudio frm js upload occured");-->
+        <!--$.ajax({-->
+            <!--type:frm.attr('method'),-->
+            <!--url:frm.attr('action'),-->
+            <!--//这个serialize 是序列表格为字符串, 就像get请求的参数一样,跟thymeleaf的object构造并不一样.可能这还不是这么玩的,但先试试会是什么样的结果-->
+            <!--data: frm.serialize(),-->
+            <!--success: function(data){-->
+                <!--alert('ok');-->
+            <!--},-->
+            <!--error:function(e) {-->
+                <!--alert("Err !");-->
+            <!--},-->
+        <!--});-->
+        <!--ev.preventDefault();-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>

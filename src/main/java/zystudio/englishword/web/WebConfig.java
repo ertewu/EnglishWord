@@ -54,4 +54,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
         System.out.println("configDefaultServletHanding occured?");
     }
+
 }
