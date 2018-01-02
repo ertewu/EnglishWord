@@ -23,7 +23,6 @@ public class HomeRestController {
             return "this is Err" ;
         }
         result.put("key","ZYStudioValue");
-        return "this is good";
+        return "this is good From RestController";
     }
-
 }

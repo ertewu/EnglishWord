@@ -25,7 +25,8 @@
                     //这个serialize 是序列表格为字符串, 就像get请求的参数一样,跟thymeleaf的object构造并不一样.可能这还不是这么玩的,但先试试会是什么样的结果- 额竟然是行的
                     data: frm.serialize(),
                     success: function(data){
-                        alert('ok');
+//                        alert('ok');
+                        alert(data);
                     },
                     error:function(e) {
                         alert("Err !");
