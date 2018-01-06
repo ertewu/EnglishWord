@@ -2,6 +2,10 @@ package zystudio.englishword.web;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,16 +14,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import zystudio.englishword.WordEntry;
+import zystudio.englishword.data.WordsRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by wzy on 5/4/17.
  */
+@ComponentScan(basePackages = "zystudio.englishword.data")
 @Controller
 @RequestMapping("/")
 public class HomeController {
+
+    private WordsRepository mWordRepo;
+
+    @Autowired
+    public HomeController(WordsRepository repo){
+        this.mWordRepo=repo;
+    }
 
     /**
      * 主页，是一个web表格了，输入内容用来保存的
@@ -31,6 +45,11 @@ public class HomeController {
         return "homePage";
     }
 
+    @RequestMapping(value="getwords",method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<WordEntry> getWords(){
+        return null;
+    }
 
     //这个并没跑通..这个map的并没跑通
 //    @RequestMapping(value = "uploadword", method = RequestMethod.POST)

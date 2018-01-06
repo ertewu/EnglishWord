@@ -1,12 +1,12 @@
 package zystudio.englishword.web;
 
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zystudio.englishword.WordEntry;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,5 +24,26 @@ public class HomeRestController {
         }
         result.put("key","ZYStudioValue");
         return "this is good From RestController";
+    }
+
+    //据说在restController里, @ResponseBody也不用写了,produces="application/json"也不用写了...
+    @RequestMapping(value="getwords2",method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<WordEntry> getWordsRestController(@RequestHeader("Accept") String accept){
+
+        System.out.println("getWordsRestController occured accept is:"+accept);
+
+        WordEntry entry1=new WordEntry();
+        entry1.setDetailMean("setDetailMean");
+        entry1.setWord("setWord");
+
+        WordEntry entry2=new WordEntry();
+        entry1.setDetailMean("setDetailMean2");
+        entry1.setWord("setWord2");
+
+        List<WordEntry> result=new ArrayList<WordEntry>();
+        result.add(entry1);
+        result.add(entry2);
+        return result;
     }
 }

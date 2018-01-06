@@ -37,6 +37,36 @@
                 ev.preventDefault();
             });
         });
+
+        $(document).ready(function(){
+            $.ajax({
+                type: "GET" ,
+                url: "getwords2",
+                headers:{
+                    Accept:"application/json;charset=utf-8"
+                },
+                success : function(data) {
+                    alert("GetWord2 success renderJson!");
+                    //这样子就可以拿到json转成的字符串形式的数据了
+                    renderJson(data);
+                },
+//                error:function(e){
+//                    alert("GetWord2 err!:"+ e.toString()+"|"+ $.ajax.status);
+//                },
+                error: function(jqXHR, textStatus ,errorThrown){
+                    alert("GetWord2 err!");
+                    //这个就是http的状态码,现在返回的是406
+                    alert("jqXHR:"+jqXHR.status);
+                    alert("responseText:"+jqXHR.responseText);
+                }
+            })
+        });
+
+        function renderJson(data){
+            var str=JSON.stringify(data);
+            $("#word_list_area").html(str);
+        }
+
     </script>
 </head>
 <body>
