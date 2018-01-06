@@ -64,7 +64,10 @@
 
         function renderJson(data){
             var str=JSON.stringify(data);
-            $("#word_list_area").html(str);
+//            $("#word_list_area").html(str);
+
+            var firstElement=data[0].word;
+            $("#word_list_area").html(firstElement);
         }
 
     </script>
