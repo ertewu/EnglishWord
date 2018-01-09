@@ -11,6 +11,8 @@
     <script src="../js/jquery-1.8.0.js">
     </script>
     <script>
+        //如果不加 CDATA 这个 thymeleaf会去尝试解析这个脚本,然后会报错...所以在thymeleaf中加script的话,还是加上CDATA吧
+        //<![CDATA[
         //这个srcipt要在加载完静态内容后生效,所以得放在form的静态html后边,否则就放在 document.ready里边也可以
         console.log("ZYStudio enter this script occured");
         $(document).ready(function(){
@@ -48,6 +50,8 @@
                 success : function(data) {
                     alert("GetWord2 success renderJson!");
                     //这样子就可以拿到json转成的字符串形式的数据了
+                    console.log(data);
+                    console.log(data[0].word);
                     renderJson(data);
                 },
 //                error:function(e){
@@ -63,13 +67,19 @@
         });
 
         function renderJson(data){
-            var str=JSON.stringify(data);
+            //返回的是个数组对象,可以用stringify打回成字符串,但是这个动作完全没意义
+//            var str=JSON.stringify(data);
 //            $("#word_list_area").html(str);
+//            var firstElement=data[0].word;
+//            $("#word_list_area").html(firstElement);
 
-            var firstElement=data[0].word;
-            $("#word_list_area").html(firstElement);
+            console.log(data.length);
+//            for(var i=0; i<data.length; i++){
+//                console.log(i);
+//            }
+
         }
-
+        //]]>
     </script>
 </head>
 <body>
