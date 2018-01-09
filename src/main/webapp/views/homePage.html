@@ -74,9 +74,15 @@
 //            $("#word_list_area").html(firstElement);
 
             console.log(data.length);
-//            for(var i=0; i<data.length; i++){
-//                console.log(i);
-//            }
+            var node= $("#word_list_area");
+            node.append("<table>")
+
+            for(var i=0; i<data.length; i++){
+                console.log(i+":"+data[i].word);
+                node.append("<tr><td>"+ data[i].word+ "</td></tr>")
+            }
+            node.append("</table>")
+//            $("#word_list_area").html();
 
         }
         //]]>

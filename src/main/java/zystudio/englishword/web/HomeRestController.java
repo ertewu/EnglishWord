@@ -38,8 +38,8 @@ public class HomeRestController {
         entry1.setWord("setWord");
 
         WordEntry entry2=new WordEntry();
-        entry1.setDetailMean("setDetailMean2");
-        entry1.setWord("setWord2");
+        entry2.setDetailMean("setDetailMean2");
+        entry2.setWord("setWord2");
 
         List<WordEntry> result=new ArrayList<WordEntry>();
         result.add(entry1);
