@@ -30,6 +30,7 @@
                     success: function(data){
 //                        alert('ok');
                         alert(data);
+                        requestData();
                     },
                     error:function(e) {
                         alert("Err !");
@@ -78,7 +79,8 @@
 //            $("#word_list_area").html(firstElement);
 
             console.log(data.length);
-            var node= $("#word_list_area");
+            var node= $("#word_list");
+            node.empty();
             node.append("<table>")
 
             for(var i=0; i<data.length; i++){
@@ -120,6 +122,8 @@
 
 <div id="word_list_area">
     <h1>已添加单词列表</h1>
+    <div id="word_list">
+    </div>
 </div>
 
 <!--<script>-->
