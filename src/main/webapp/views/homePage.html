@@ -40,7 +40,10 @@
             });
         });
 
-        $(document).ready(function(){
+        $(document).ready(requestData() );
+
+        function requestData(){
+            console.log("requestData method occured");
             $.ajax({
                 type: "GET" ,
                 url: "getwords2",
@@ -64,7 +67,7 @@
                     alert("responseText:"+jqXHR.responseText);
                 }
             })
-        });
+        }
 
         function renderJson(data){
             //返回的是个数组对象,可以用stringify打回成字符串,但是这个动作完全没意义
