@@ -1,9 +1,36 @@
+#repo_operate_area {
+    float: left;
+    width: 70px;
+}
+
 #new_word_area {
     float: left;
-    width: 35%;
+    width: 30%;
+    background-color:rgb(255,0,255);
+
 }
 
 #word_list_area {
-    float: left;
-    width: 65%;
+    /*float: left;*/
+    /*width: 65%;*/
+    margin-left: auto;
+    margin-right:auto;
+}
+
+#word_list_title {
+    text-align: center;
+}
+
+table {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+/*因为是动态的，果然这样子设静态的css并不行了*/
+.modal-backdrop {
+    /*filter: alpha(opacity=50);*/
+    /*opacity: .5;*/
+    filter: alpha(opacity=0);
+    opacity: 0;
 }

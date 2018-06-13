@@ -1,103 +1,36 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" >
 
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html;charset=utf-8"/>
-    <!--汉语标题，还不能显示出来，有空再弄-->
     <title>英语单词记录系统</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}"/>
-    <!--<link rel="stylesheet" type="text/css" href="../resources/homePage.css"></link>-->
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/resources/homePage.css}"/>-->
+    <link rel="stylesheet" type="text/css" href="../resources/homePage.css"></link>
     <!--这个jquery刚开始用的网上的url还不行,在调试时,先得弄到本地来"-->
-    <script src="../js/jquery-1.8.0.js">
-    </script>
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="../js/my.js"/>-->
     <script>
         //如果不加 CDATA 这个 thymeleaf会去尝试解析这个脚本,然后会报错...所以在thymeleaf中加script的话,还是加上CDATA吧
         //<![CDATA[
         //这个srcipt要在加载完静态内容后生效,所以得放在form的静态html后边,否则就放在 document.ready里边也可以
         console.log("ZYStudio enter this script occured");
-        $(document).ready(function(){
-
-            var frm;
-            console.log("ZYStudio document ready occured");
-            frm = $("#uploadword_form");
-            frm.submit(function(ev){
-                console.log("ZYStudio frm sumbmit upload occured");
-                $.ajax({
-                    type:frm.attr('method'),
-                    url:frm.attr('action'),
-                    //这个serialize 是序列表格为字符串, 就像get请求的参数一样,跟thymeleaf的object构造并不一样.可能这还不是这么玩的,但先试试会是什么样的结果- 额竟然是行的
-                    data: frm.serialize(),
-                    success: function(data){
-//                        alert('ok');
-                        alert(data);
-                        requestData();
-                    },
-                    error:function(e) {
-                        alert("Err !");
-                    },
-                });
-                //location.reload就可以刷新网页
-//                location.reload();
-                ev.preventDefault();
-            });
-        });
-
-        $(document).ready(requestData() );
-
-        function requestData(){
-            console.log("requestData method occured");
-            $.ajax({
-                type: "GET" ,
-                url: "getwords2",
-                headers:{
-                    Accept:"application/json;charset=utf-8"
-                },
-                success : function(data) {
-                    alert("GetWord2 success renderJson!");
-                    //这样子就可以拿到json转成的字符串形式的数据了
-                    console.log(data);
-                    console.log(data[0].word);
-                    renderJson(data);
-                },
-//                error:function(e){
-//                    alert("GetWord2 err!:"+ e.toString()+"|"+ $.ajax.status);
-//                },
-                error: function(jqXHR, textStatus ,errorThrown){
-                    alert("GetWord2 err!");
-                    //这个就是http的状态码,现在返回的是406
-                    alert("jqXHR:"+jqXHR.status);
-                    alert("responseText:"+jqXHR.responseText);
-                }
-            })
-        }
-
-        function renderJson(data){
-            //返回的是个数组对象,可以用stringify打回成字符串,但是这个动作完全没意义
-//            var str=JSON.stringify(data);
-//            $("#word_list_area").html(str);
-//            var firstElement=data[0].word;
-//            $("#word_list_area").html(firstElement);
-
-            console.log(data.length);
-            var node= $("#word_list");
-            node.empty();
-            node.append("<table>")
-
-            for(var i=0; i<data.length; i++){
-                console.log(i+":"+data[i].word);
-                node.append("<tr><td>"+ data[i].word+ "</td></tr>")
-            }
-            node.append("</table>")
-//            $("#word_list_area").html();
-
-        }
+        // $(document).ready(startRequest());
+        // $(document).ready(requestData());
         //]]>
     </script>
 </head>
 <body>
 
+<div id="repo_operate_area"  data-toggle="modal" data-target="#new_word_area">
+    <button>Menu</button>
+</div>
+
 <!--Hello World-->
-<div id="new_word_area">
+<div id="new_word_area"  class="modal fade"  aria-hidden="true" >
+    <button   data-toggle="modal"  data-target="#new_word_area">关闭</button>
     <h1>请在这里添加新的单词</h1>
     <!--<form method="POST"  action="uploadword"   th:object="${wordentry}">-->
     <form id="uploadword_form" method="POST"  action="uploadword"   th:object="${wordentry}">
@@ -121,10 +54,33 @@
 </div>
 
 <div id="word_list_area">
-    <h1>已添加单词列表</h1>
+    <h1 id="word_list_title">已添加单词列表</h1>
     <div id="word_list">
+        <table>
+            <tr>
+                <th>  单词  </th>
+                <th>  含义  </th>
+            </tr>
+            <tr>
+                <td>
+                    home
+                </td>
+                <td>
+                    家庭
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   bird
+                </td>
+                <td>
+                    鸟儿
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
+
 
 <!--<script>-->
     <!--//这个srcipt要在加载完静态内容后生效,所以得放在form的静态html后边,否则就放在 document.ready里边也可以,但是frs变量,就也一定要在ready中再初始化-->
